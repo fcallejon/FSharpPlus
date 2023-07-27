@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Title>FSharpPlus.Core</Title>
+        <AssemblyName>FSharpPlus.Core</AssemblyName>
+        <AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
+        <FileVersion>$(VersionPrefix).0</FileVersion>
+        <ProjectGuid>1368368e-d2f4-4fef-bb2f-492e05156e0f</ProjectGuid>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <OtherFlags>--warnon:1182 $(OtherFlags)</OtherFlags>
+        <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+        <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+        <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+        <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <Configurations>Debug;Release;Fable;Fable3</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <LangVersion>6.0</LangVersion>
+        <DefineConstants Condition=" '$(Configuration)' == 'Fable'">$(DefineConstants);FABLE_COMPILER</DefineConstants>
+        <DefineConstants Condition=" '$(Configuration)' == 'Fable3'">$(DefineConstants);FABLE_COMPILER;FABLE_COMPILER_3</DefineConstants>
+        <DefineConstants Condition=" '$(Configuration)' == 'Fable4'">$(DefineConstants);FABLE_COMPILER;FABLE_COMPILER_4</DefineConstants>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(CompilerTest)' == 'true'">
+        <FscToolPath>$(FSC_ToolPathCompilerBuild)</FscToolPath>
+        <FscToolExe>$(FSC_ExePathCompilerBuild)</FscToolExe>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Internals.fs" />
+        <Compile Include="Extensions/Option.fs" />
+        <Compile Include="Extensions/ValueOption.fs" />
+        <Compile Include="Extensions/Nullable.fs" />
+        <Compile Include="Extensions/Result.fs" />
+        <Compile Include="Extensions/Choice.fs" />
+        <Compile Include="Extensions/Seq.fs" />
+        <Compile Include="Extensions/IList.fs" />
+        <Compile Include="Extensions/List.fs" />
+        <Compile Include="Extensions/Array.fs" />
+        <Compile Include="Extensions/ResizeArray.fs" />
+        <Compile Include="Extensions/String.fs" />
+        <Compile Include="Extensions/IReadOnlyCollection.fs" />
+        <Compile Include="Extensions/IReadOnlyList.fs" />
+        <Compile Include="Extensions/Lazy.fs" />
+        <Compile Include="Extensions/Map.fs" />
+        <Compile Include="Extensions/Dictionary.fs" />
+        <Compile Include="Extensions/Dict.fs" />
+        <Compile Include="Extensions/IReadOnlyDictionary.fs" />
+        <Compile Include="Extensions/Enumerator.fs" />
+        <Compile Include="Extensions/Task.fs" />
+        <Compile Include="Extensions/ValueTask.fs" />
+        <Compile Include="Extensions/Async.fs" />
+        <Compile Include="Extensions/Extensions.fs" />
+        <Compile Include="Extensions/Tuple.fs" />
+        <Compile Include="Extensions/ValueTuple.fs" />
+    </ItemGroup>
+
+    <!-- Add source files to "fable" folder in Nuget package - required for the library to be consumable by Fable -->
+    <ItemGroup>
+        <Content Include="*.fsproj; *.fs" PackagePath="fable/" />
+        <Content Include="Extensions/*.fs" PackagePath="fable/Extensions" />
+        <Content Include="Data/*.fs" PackagePath="fable/Data" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Update="FSharp.Core" Version="6.0.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="Data\NonEmptySeq.fs" />
+    </ItemGroup>
+
+</Project>
